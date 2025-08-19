@@ -59,7 +59,7 @@ export function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider value={value}>
-      {!initializing && children}
+      {children}
     </AuthContext.Provider>
   );
 }
