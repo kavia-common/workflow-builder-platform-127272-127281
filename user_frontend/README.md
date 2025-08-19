@@ -1,82 +1,67 @@
-# Lightweight React Template for KAVIA
+# Workflow Builder - user_frontend
 
-This project provides a minimal React template with a clean, modern UI and minimal dependencies.
+A modern, minimalistic React frontend for SMB owners to describe workflows and operate generated apps.  
+Layout includes a sidebar, top bar, and card-based modules using a light theme with the following palette:
+- Primary: #2980b9
+- Secondary: #27ae60
+- Accent: #f39c12
 
 ## Features
 
-- **Lightweight**: No heavy UI frameworks - uses only vanilla CSS and React
-- **Modern UI**: Clean, responsive design with KAVIA brand styling
-- **Fast**: Minimal dependencies for quick loading times
-- **Simple**: Easy to understand and modify
+- Workflow description input to generate new apps
+- Dashboard of generated apps and KPIs
+- CRUD interfaces for Leads, Invoices, and Payments
+- Integration management for Stripe and QuickBooks
+- Authentication and user management
 
 ## Getting Started
 
-In the project directory, you can run:
+1. Copy the environment example and set values:
+   cp .env.example .env
+2. Install dependencies:
+   npm install
+3. Start the dev server:
+   npm start
 
-### `npm start`
+## Environment Variables
 
-Runs the app in development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+Define in `.env`:
+- REACT_APP_API_BASE_URL: Base URL for backend API (e.g., http://localhost:8000/api)
+- REACT_APP_STRIPE_PUBLIC_KEY: Optional Stripe publishable key (if needed by client flows)
+- REACT_APP_QUICKBOOKS_CLIENT_ID: Optional QuickBooks Client ID for OAuth flows (if required)
+- REACT_APP_SITE_URL: Public site URL for redirects (defaults to window.location.origin)
 
-### `npm test`
+## Project Structure
 
-Launches the test runner in interactive watch mode.
+- src/
+  - components/ (Sidebar, Topbar, Card)
+  - context/ (AuthContext)
+  - pages/ (Dashboard, WorkflowBuilder, Leads, Invoices, Payments, Integrations, Settings, Login, Register, NotFound)
+  - services/ (api, env, storage)
+  - App.js, App.css, index.js, index.css
 
-### `npm run build`
+## Notes
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- All API endpoints use REACT_APP_API_BASE_URL and attach the Bearer token from localStorage when available.
+- Authentication assumes the backend exposes the following endpoints:
+  - POST /auth/login
+  - POST /auth/register
+  - GET  /auth/me
+- CRUD endpoints assumed:
+  - /leads, /invoices, /payments with GET/POST/PUT/DELETE
+- Integration endpoints assumed:
+  - /integrations/status
+  - /integrations/stripe/connect, /integrations/stripe/disconnect
+  - /integrations/quickbooks/connect, /integrations/quickbooks/disconnect
 
-## Customization
+Adjust endpoints as needed to match your backend.
 
-### Colors
+## Scripts
 
-The main brand colors are defined as CSS variables in `src/App.css`:
+- npm start
+- npm run build
+- npm test
 
-```css
-:root {
-  --kavia-orange: #E87A41;
-  --kavia-dark: #1A1A1A;
-  --text-color: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.7);
-  --border-color: rgba(255, 255, 255, 0.1);
-}
-```
+## License
 
-### Components
-
-This template uses pure HTML/CSS components instead of a UI framework. You can find component styles in `src/App.css`. 
-
-Common components include:
-- Buttons (`.btn`, `.btn-large`)
-- Container (`.container`)
-- Navigation (`.navbar`)
-- Typography (`.title`, `.subtitle`, `.description`)
-
-## Learn More
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+MIT
